@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-frontend
+  namespace: default
+  labels:
+    env: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend-fargate
+    select.app: frontend-fargate
+  template:
+    metadata:
+      labels:
+        app: frontend-fargate
+    spec.containers.image: "image: 4098d799"
+    spec:
+      containers:
+        - name: demo-frontend
+          image: 499486695208.dkr.ecr.ap-northeast-2.amazonaws.com/demo-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
